@@ -1,11 +1,12 @@
+%code change test
 close all;clear all;clc;
-%% ²ÎÊıÉèÖÃ 
+%% å‚æ•°è®¾ç½® 
 % startpos1 = 100 ;endpos1 = 290; 
 startpos1 = 185 ;endpos1 = 232; 
 startpos23 = 185;endpos23 = 212;  
 starttime  = 1;
 
-%% Êı¾İµ¼Èë & Ô¤´¦Àí£¨È¥³ıµ×Ôë+ÈËÊıÅĞ¶Ï¡¢¾ØÕóÇĞ¸î+ÒÆ³ı¾²Ö¹Ê±¼ä£©
+%% æ•°æ®å¯¼å…¥ & é¢„å¤„ç†ï¼ˆå»é™¤åº•å™ª+äººæ•°åˆ¤æ–­ã€çŸ©é˜µåˆ‡å‰²+ç§»é™¤é™æ­¢æ—¶é—´ï¼‰
 intensity1 = importdata('B2.mat');   
 intensity2 = importdata('B1.mat');
 intensity3 = importdata('B3.mat');
@@ -39,10 +40,10 @@ num_walker3 = get_wallker_num(noise_reducted3,starttime);
 max1=max_pre(max(noise_reducted1));
 max2=max_pre(max(noise_reducted2));
 max3=max_pre(max(noise_reducted3));
-%Ê±Óò·åÖµ´Ö¼ÆÊı¡ª>Interval_THREAD
-%Silence Removal:Interval >= 2*Interval_THREAD ÅĞ¶¨ÎªSilence
+%æ—¶åŸŸå³°å€¼ç²—è®¡æ•°â€”>Interval_THREAD
+%Silence Removal:Interval >= 2*Interval_THREAD åˆ¤å®šä¸ºSilence
 
-% pure_noise = max3(1680:1979);%300µãÔëÉù
+% pure_noise = max3(1680:1979);%300ç‚¹å™ªå£°
 % max11 = zeros(1,5500);
 % max11(1:3000) = max1(1:3000); 
 % for k = 1:5
@@ -50,7 +51,7 @@ max3=max_pre(max(noise_reducted3));
 % end        
 % max11(4501:5500)= max1(4001:5000);
 
-% figure(10);mesh(intensity1);    % h1=title("¼²×ß");h1.FontSize = 25;
+% figure(10);mesh(intensity1);    % h1=title("ç–¾èµ°");h1.FontSize = 25;
 % figure(14);mesh(intensity2);
 % figure(15);mesh(intensity3);
 % % 
@@ -59,15 +60,15 @@ subplot(3,1,1);plot(max1);
 subplot(3,1,2);plot(max2);
 subplot(3,1,3);plot(max3);
 
-%% ·Ö×éÌáÈ¡ Ê±¼ä-×î´óÇ¿¶ÈÍ¼ µÄ²ÎÊı  (º¬ÔëÉù¶à,ºóÆÚ¸ü»»£©·ÇÆ½ÎÈĞÅºÅ¿ÉÓÃ£¿
-%·Ö×é? ÇóÍ³¼ÆÁ¿£º·½²î¾ùÖµ±È¡¢·åÖµÏµÊı   
+%% åˆ†ç»„æå– æ—¶é—´-æœ€å¤§å¼ºåº¦å›¾ çš„å‚æ•°  (å«å™ªå£°å¤š,åæœŸæ›´æ¢ï¼‰éå¹³ç¨³ä¿¡å·å¯ç”¨ï¼Ÿ
+%åˆ†ç»„? æ±‚ç»Ÿè®¡é‡ï¼šæ–¹å·®å‡å€¼æ¯”ã€å³°å€¼ç³»æ•°   
 % n = 2500;
 % mydata1 = yuanbaoshuzu(max1,n);features1 = extractf(mydata1,max1,n);
 % mydata2 = yuanbaoshuzu(max2,n);features2 = extractf(mydata2,max2,n);
 % mydata3 = yuanbaoshuzu(max3,n);features3 = extractf(mydata3,max3,n);
 
-%% ²½ÆµÌØÕ÷ÍÚ¾ò                 
-%Ö÷·åÖµ¡¢¸±·åÖµ¡¢Ö÷¸±·åÖµ±È  ·ÇÆ½ÎÈĞÅºÅ¿ÉÓÃ£¿
+%% æ­¥é¢‘ç‰¹å¾æŒ–æ˜                 
+%ä¸»å³°å€¼ã€å‰¯å³°å€¼ã€ä¸»å‰¯å³°å€¼æ¯”  éå¹³ç¨³ä¿¡å·å¯ç”¨ï¼Ÿ
 figure(3);
 subplot(3,1,1);plot(xcorr(max1));
 subplot(3,1,2);plot(xcorr(max2));
@@ -75,23 +76,23 @@ subplot(3,1,3);plot(xcorr(max3));
 % 
 [freq1,num_peak1,~,~,delta_peak_time1] =  Rx_ana(max1,410);  % NOTE:main_peak_index = length(max)
 [freq2,num_peak2,~,~,delta_peak_time2] =  Rx_ana(max2,410);
-[freq3,num_peak3,~,~,delta_peak_time3] =  Rx_ana(max3,410);  % RUNNING! GAP = 300   Ì¤²½ GAP = 350 
+[freq3,num_peak3,~,~,delta_peak_time3] =  Rx_ana(max3,410);  % RUNNING! GAP = 300   è¸æ­¥ GAP = 350 
 
-[f1,peak1_pos,peak1_value,~,delta_step_time_var1] = get_peak_pos(max1,noise_reducted1,num_peak1,delta_peak_time1,startpos1,500);  %fÊÇÔÙ½áºÏÊ±¼ä-×î´óÇ¿¶ÈÍ¼µÃµ½µÄ²½Æµ£¬¸ü¾«×¼
+[f1,peak1_pos,peak1_value,~,delta_step_time_var1] = get_peak_pos(max1,noise_reducted1,num_peak1,delta_peak_time1,startpos1,500);  %fæ˜¯å†ç»“åˆæ—¶é—´-æœ€å¤§å¼ºåº¦å›¾å¾—åˆ°çš„æ­¥é¢‘ï¼Œæ›´ç²¾å‡†
 [f2,peak2_pos,peak2_value,~,delta_step_time_var2] = get_peak_pos(max2,noise_reducted2,num_peak2,delta_peak_time2,startpos23,500);
 [f3,peak3_pos,peak3_value,~,delta_step_time_var3] = get_peak_pos(max3,noise_reducted3,num_peak3,delta_peak_time3,startpos23,500);
 
-% % delta_step_time_meanÓëfreqµÈĞ§,ÔİÊ±ÉáÈ¥  
-% % peak_value ·´Ó³µÅÁ¦ÌØÕ÷£¬ÓëÄÜÁ¿Ïà¹Ø£¬¿ÉÓÃÓÚ¼òµ¥¼ÆËãÄÜÁ¿£¬µ«ÎŞ·¨¼æ¹Ë×óÓÒÆ«ºÍ¾ÓÖĞµÄ×ß·¨
+% % delta_step_time_meanä¸freqç­‰æ•ˆ,æš‚æ—¶èˆå»  
+% % peak_value åæ˜ è¹¬åŠ›ç‰¹å¾ï¼Œä¸èƒ½é‡ç›¸å…³ï¼Œå¯ç”¨äºç®€å•è®¡ç®—èƒ½é‡ï¼Œä½†æ— æ³•å…¼é¡¾å·¦å³åå’Œå±…ä¸­çš„èµ°æ³•
 freq = [f1,f2,f3];
 disp(freq);  
-%% ²½·ùÌØÕ÷ÍÚ¾ò       debug
+%% æ­¥å¹…ç‰¹å¾æŒ–æ˜       debug
 [~,average_stride1,var_stride1] = get_stride(peak1_pos);
 [~,average_stride2,var_stride2] = get_stride(peak2_pos);
 [~,average_stride3,var_stride3] = get_stride(peak3_pos);
 
-%% ÄÜÁ¿ÌØÕ÷ÍÚ¾ò       debug
-% Í³¼Ætime_range peak_pos_rangeÄÚµÄÊ±ÓòÄÜÁ¿
+%% èƒ½é‡ç‰¹å¾æŒ–æ˜       debug
+% ç»Ÿè®¡time_range peak_pos_rangeå†…çš„æ—¶åŸŸèƒ½é‡
 [step_energy_array,left_step_energy_array,right_step_energy_array] = get_step_energy2(noise_reducted,startpos,peak_pos,peak_index)
 
 % [step_energy_array1,left_side_E1,right_side_E1] = get_step_energy2(noise_reducted1,startpos1,peak1_pos,peak1_index);
@@ -116,17 +117,17 @@ disp(freq);
 % var_mean_ratio_E1 = var(step_energy_array1)/mean_E1;
 % var_mean_ratio_E2 = var(step_energy_array2)/mean_E2;
 % var_mean_ratio_E3 = var(step_energy_array3)/mean_E3;
-%% ¶¨Î»:Ö»·Ö±æÔÚ×ó/ÓÒ¹âÏËÉÏÄ³Î»ÖÃµã
+%% å®šä½:åªåˆ†è¾¨åœ¨å·¦/å³å…‰çº¤ä¸ŠæŸä½ç½®ç‚¹
 % pos1 = get_each_step_pos(left_side_E1,right_side_E1,peak1_pos);
 % pos2 = get_each_step_pos(left_side_E2,right_side_E2,peak2_pos);
 % pos3 = get_each_step_pos(left_side_E3,right_side_E3,peak3_pos);
-%% ×²»÷Á¦+µÅÁ¦ÌØÕ÷ÍÚ¾ò:µ¥²½·ÇÆ½ÎÈĞÅºÅ·ÖÎö
+%% æ’å‡»åŠ›+è¹¬åŠ›ç‰¹å¾æŒ–æ˜:å•æ­¥éå¹³ç¨³ä¿¡å·åˆ†æ
 % used_fig_num = 6;
-%% »ñÈ¡·åÖµÎ»ÖÃÓĞĞ§Ê±¼ä·¶Î§ÄÚ£¨256µã£©µÄÕñ¶¯ĞÅºÅ,²¢Êä³öÂË²¨Ç° & ºóµÄÃ¿Ò»²½µÄÕñ¶¯ĞÅºÅ
+%% è·å–å³°å€¼ä½ç½®æœ‰æ•ˆæ—¶é—´èŒƒå›´å†…ï¼ˆ256ç‚¹ï¼‰çš„æŒ¯åŠ¨ä¿¡å·,å¹¶è¾“å‡ºæ»¤æ³¢å‰ & åçš„æ¯ä¸€æ­¥çš„æŒ¯åŠ¨ä¿¡å·
 % [raw_sig1_group,step_sig1_group,after_hampel1] = get_each_step_sig(peak1_pos,peak1_index,intensity1);
 % [raw_sig2_group,step_sig2_group,after_hampel2] = get_each_step_sig(peak2_pos,peak2_index,intensity2);
 % [raw_sig3_group,step_sig3_group,after_hampel3] = get_each_step_sig(peak3_pos,peak3_index,intensity3);
-% figure(20);plot(step_sig1_group(1,:));title("¼²×ßµÚÒ»²½");xlabel('Ê±¼ä');ylabel('·ù¶È')
+% figure(20);plot(step_sig1_group(1,:));title("ç–¾èµ°ç¬¬ä¸€æ­¥");xlabel('æ—¶é—´');ylabel('å¹…åº¦')
 
 % figure(12)
 % subplot(331);plot(xcorr(step_sig1_group(2,:)));title('2')
@@ -139,7 +140,7 @@ disp(freq);
 % subplot(338);plot(xcorr(step_sig1_group(9,:)));title('9')
 % subplot(339);plot(xcorr(step_sig1_group(10,:)));title('10')
 
-%% µ¥²½ĞÅºÅÊ±ÓòÌØÕ÷ÌáÈ¡:
+%% å•æ­¥ä¿¡å·æ—¶åŸŸç‰¹å¾æå–:
 % after_pca1 = step_group_observe(raw_sig1_group,used_fig_num,after_hampel1);  %PCA
 % after_pca2 = step_group_observe(raw_sig2_group,used_fig_num+1,after_hampel2);
 % after_pca3 = step_group_observe(raw_sig3_group,used_fig_num+2,after_hampel3);
@@ -152,8 +153,8 @@ disp(freq);
 % feature2_single_step_time_domain = extract_f_of_single_step(after_pca2);
 % feature3_single_step_time_domain = extract_f_of_single_step(after_pca3);
 
-%% DSTFT·ÖÎö£ºÄ¿Ç°ĞèÒª´óÁ¿µÄ²½Êı²ÅÓĞ¿ÉÄÜ»ñÈ¡×¼È·µÄÌØÕ÷²ÎÊı
-%parameter:ÓĞĞ§Ê±¿íµãÊı & Ö÷Òª³É·ÖÈğÀû²¨µÄÖĞĞÄÆµÂÊ & ÓĞĞ§´ø¿í & ÖĞĞÄÆµÂÊµÄ×óÓÒÄÜÁ¿±È
+%% DSTFTåˆ†æï¼šç›®å‰éœ€è¦å¤§é‡çš„æ­¥æ•°æ‰æœ‰å¯èƒ½è·å–å‡†ç¡®çš„ç‰¹å¾å‚æ•°
+%parameter:æœ‰æ•ˆæ—¶å®½ç‚¹æ•° & ä¸»è¦æˆåˆ†ç‘åˆ©æ³¢çš„ä¸­å¿ƒé¢‘ç‡ & æœ‰æ•ˆå¸¦å®½ & ä¸­å¿ƒé¢‘ç‡çš„å·¦å³èƒ½é‡æ¯”
 % [stft_feature_matrix3,T_width3,Rayleigh_Freq3,BW3,LR_Ratio3] = get_stft_feature(num_peak3,step_sig3_group);
 % [stft_feature_matrix2,T_width2,Rayleigh_Freq2,BW2,LR_Ratio2] = get_stft_feature(num_peak2,step_sig2_group);
 % [stft_feature_matrix1,T_width1,Rayleigh_Freq1,BW1,LR_Ratio1] = get_stft_feature(num_peak1,step_sig1_group);
@@ -164,5 +165,5 @@ disp(freq);
 % figure(188);mesh(Spec_1);
 %% WT
 
-%% HHT£¿
-%% ¶şÎ¬Gabor±ä»»£¿
+%% HHTï¼Ÿ
+%% äºŒç»´Gaborå˜æ¢ï¼Ÿ
