@@ -1,0 +1,42 @@
+2022.11.24
+数据集：
+intensity1 = importdata('chzblindright.mat');%盲杖右
+intensity2 = importdata('chzblindmiddle.mat');%盲杖中
+intensity3 = importdata('mcblindmiddle.mat');%mc中
+intensity4 = importdata('chzmiddle.mat');%中
+intensity5 = importdata('chzleft.mat');%左
+intensity6 = importdata('lylzmiddle.mat');%盲杖左
+features1 =  featureall(intensity1,169,240,starttime,length(intensity1),GAP);
+features2 =  featureall(intensity2,157,227,starttime,length(intensity2),GAP);
+features3 =  featureall(intensity3,84,281,starttime,length(intensity3),GAP);
+features4 =  featureall(intensity4,152,254,starttime,length(intensity4),GAP);
+features5 =  featureall(intensity5,155,246,starttime,length(intensity5),GAP);
+features6 =  featureall(intensity6,101,284,starttime,length(intensity6),GAP);
+采用全部特征
+结果：
+KNN：0%
+svm：66.7%
+kmeans：66.7%
+测试数据集1:
+KNN：16%
+svm：33.3%
+
+features1 =  featureall(intensity1,169,240,starttime,length(intensity1),GAP);
+features2 =  featureall(intensity2,157,227,starttime,length(intensity2),GAP);
+features3 =  featureall(intensity3,84,281,starttime,length(intensity3),GAP);
+features4 =  featureall(intensity4,152,254,starttime,length(intensity4),GAP);
+features5 =  featureall(intensity5,155,246,starttime,length(intensity5),GAP);
+features6 =  featureall(intensity6,114,293,starttime,length(intensity6),GAP);
+KNN：50%
+svm：83%
+kmeans：66.7%
+只用长时：
+kmenas:66.7%
+svm：33%
+knn：33.3%
+
+
+
+手动只使用长时特征：
+KNN：0
+SVM：0
