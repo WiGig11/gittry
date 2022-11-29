@@ -3,12 +3,12 @@ clear all;
 close all;
 %% 数据读入
 features = [];
-re = xlsread('G:\硕士期间\光纤传感\数据\gittry\testmat\test.xlsx','sheet1');
+re = xlsread('G:\硕士期间\光纤传感\数据\gittry\testmat\test1.xlsx','sheet1');
 fnames = {'freq','var_freq','ave_str','var_str','step_energy','var_mean_ratio','peakindex','mean_xocrr','timew','cw','bw','lr_ratio','T1','Cave1', 'T2','Cave2','T3','Cave3','timepdist2D','mean_bw','mean_peak_low'};
 fnames1 = {'ID','freq','ave_str','var_str','step_energy','var_mean_ratio','peakindex','mean_xocrr','timew','cw','bw','lr_ratio','T1','Cave1', 'T2','Cave2','T3','Cave3','timepdist2D','mean_bw','mean_peak_low','type'};
 %% 修改此处
-% typeof = [0;0;1;1;0;0;0;0;1;1;1;1;1;1;0;0;0;0;0];
-typeof = [0;0;1;1;0;0;0;0];
+typeof = [0;0;1;1;0;0;0;0;1;1;1;1;1;1;0;0;0;0;0];
+% typeof = [0;0;1;1;0;0;0;0];
 %%
 re =re';
 a = find(sum(re)==0);
@@ -31,9 +31,9 @@ end
 temp2
 re=[];
 %% 修改此处
-tarnum = [1,2,3,5,11,21];
-%%
-renew = [renew(:,tarnum)];
+% tarnum = [1,2,3,5,11,21];
+% %%
+% renew = [renew(:,tarnum)];
 [rank, weights] = relieff(renew,typeof,2);
 count = 0;
 while(~isempty(find(weights<0, 1)))
