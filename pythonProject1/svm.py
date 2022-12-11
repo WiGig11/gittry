@@ -50,25 +50,25 @@ def removespace(set,col):
     setnew = []
     setf = []
     for i in range(len(set)):
-        setnew  = set[i][:col]
+        setnew  = set[i][1:col]
         setf.append(setnew)
     return setf
 
 def gettype(set):
     typearray = [0 for i in range(len(set))]
     for i in range(len(set)):
-        typearray[i] = set[i][-1]
+        typearray[i] = set[i][-2]
     return typearray
 
 
 
 def main():
-    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\pythonProject1\try1.csv")
+    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv")
     dataset.pop(0)
     lend = len(dataset)
     count = 0
     for i in range(lend):
-        dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\pythonProject1\try1.csv")
+        dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv")
         dataset.pop(0)
         trainingSet = []  # 训练数据集
         testSet = []  # 测试数据集
@@ -78,13 +78,13 @@ def main():
         print("Train set :" + repr(len(trainingSet)))
         print("Test set :" + repr(len(testSet)));
         # 去除空格
-        trainingSetn = removespace(trainingSet, len(trainingSet[0])-1)
-        testSetn = removespace(testSet, len(trainingSet[0])-1)
+        trainingSetn = removespace(trainingSet, len(trainingSet[0])-2)
+        testSetn = removespace(testSet, len(trainingSet[0])-2)
         # 得到类别
         typetrain = []
         typetest = []
-        y_train = np.asarray(gettype(trainingSetn))
-        y_test = np.asarray(gettype(testSetn))
+        y_train = np.asarray(gettype(trainingSet))
+        y_test = np.asarray(gettype(testSet))
         standardScaler = StandardScaler()
         x_train = np.asarray(trainingSetn)
         x_test = np.asarray(testSetn)

@@ -91,7 +91,7 @@ end
 %     te = [te,temp];
 % end
 % te = [te(:,1),te(:,2),te(:,3),te(:,4),te(:,length(c)+2)]
-fid = fopen('G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv', 'w+');
+fid = fopen('G:\硕士期间\光纤传感\数据\gittry\pythonProject1\yanshi1.csv', 'w+');
 for j =1 :length(te1)
     if j ==1
         for k = 1:length(c)+2

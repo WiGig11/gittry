@@ -89,14 +89,14 @@ def getAccuracy(testSet, predictions):
             correct += 1
     return (correct / float(len(testSet))) * 100.0
 
-
+#已经改好了去除type和ID的
 def main():
-    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\pythonProject1\try1.csv")
+    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv")
     dataset.pop(0)
     lend = len(dataset)
     count = 0
     for i in range(lend):
-        dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\pythonProject1\try1.csv")
+        dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv")
         dataset.pop(0)
         trainingSet = []  # 训练数据集
         testSet = []  # 测试数据集

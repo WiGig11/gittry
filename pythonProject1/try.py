@@ -80,11 +80,12 @@ def getAccuracy(testSet, predictions):
     return (correct / float(len(testSet))) * 100.0
 
 
+#已经改好了去除type和ID的
 def main():
     trainingSet = []  # 训练数据集
     testSet = []  # 测试数据集
-    split = 0.8333  # 分割的比例
-    loadDataset(r"G:\硕士期间\光纤传感\数据\pythonProject1\try1.csv", split, trainingSet, testSet)
+    split = 0.7  # 分割的比例
+    loadDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv", split, trainingSet, testSet)
     print("Train set :" + repr(len(trainingSet)))
     print("Test set :" + repr(len(testSet)));
     predictions = []
