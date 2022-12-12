@@ -56,12 +56,12 @@ def gettype(set):
 
 def main():
 #模型评价以及效果评价
-    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\try1.csv")
+    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\yanshi1.csv")
     dataset.pop(0)
     trainingSet = []  # 训练数据集
     testSet = []  # 测试数据集
     split = 0.7
-    loadDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv", split, trainingSet, testSet)
+    loadDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\yanshi1.csv", split, trainingSet, testSet)
     print("Train set :" + repr(len(trainingSet)))
     print("Test set :" + repr(len(testSet)));
     # 去除空格

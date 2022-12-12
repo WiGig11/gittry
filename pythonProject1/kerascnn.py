@@ -56,30 +56,32 @@ def gettype(set):
 
 
 def main():
-    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\try1.csv")
+    dataset = divideDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\yanshi1.csv")
     dataset.pop(0)
     trainingSet = []  # 训练数据集
     testSet = []  # 测试数据集
     split = 0.7
-    loadDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv", split, trainingSet, testSet)
+    loadDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\yanshi1.csv", split, trainingSet, testSet)
     print("Train set :" + repr(len(trainingSet)))
     print("Test set :" + repr(len(testSet)));
     # 去除空格
     trainingSetn = removespace(trainingSet, len(trainingSet[0])-2)
     testSetn = removespace(testSet, len(trainingSet[0])-2)
     # 得到类别
+    x_train = np.asarray(trainingSetn)
+    x_test = np.asarray(testSetn)
+
     typetrain = []
     typetest = []
     y_train = np.asarray(gettype(trainingSet))
     y_test = np.asarray(gettype(testSet))
-    x_train = np.asarray(trainingSetn)
-    x_test = np.asarray(testSetn)
     y = to_categorical(y_train)
     """
     添加三层。
     第一层激活函数选择sigmoid;
     第二层激活函数选择tanh;
     第三层激活函数选择softmax。
+    
     """
     x_train = np.expand_dims(x_train, axis=2)  # 表示是是增加的维度是在第三个维度上
     # reshape (569, 30) to (569, 30, 1)  now input can be set as input_shape=(30,1)
