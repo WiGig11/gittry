@@ -131,7 +131,7 @@ def main():
     plt.plot(hist.history['accuracy'], c='purple', alpha=0.3)
     ax2 = plt.gca().twinx()
     plt.show()
-    plt(model,to_f)
+
 
 if __name__ == "__main__":
     main()

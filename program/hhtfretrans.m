@@ -1,4 +1,4 @@
-function [frequenvy_matrix,hhtfeature] = hhtfretrans(signal_matrix,flag)
+function [frequenvy_matrix,hhtfeature,bjp] = hhtfretrans(signal_matrix,flag)
 %HHTFRETRANS %hht频谱变换，逐行做fft变换，利用内置函数做特征提取，输出matrix为对每个模态函数嘴的fft，特征为前三个模态函数的特征
 %   此处显示详细说明
 sizeofsignal = size(signal_matrix);
@@ -40,7 +40,7 @@ end
 
 %%
 [hhtampli,hhtfre,hhttime] = hhspectrum(signal_matrix);
-[im,~,~] = toimage(hhtampli,hhtfre,hhttime,length(hhttime));
+[im,~,fh] = toimage(hhtampli,hhtfre,hhttime,length(hhttime));
 % figure;
 % set(gcf,'Color','w');
 % % imagesc(hhttime/length(after_pca1),[0,0.5*fs],im);
@@ -50,7 +50,15 @@ end
 % xlabel('时间(s)');
 % ylabel('频率(Hz)');
 % title('HHT谱') ;
-
+fs = length(m1)
+for k=1:size(im,1)
+    bjp(k)=sum(im(k,:))/fs;
+end
+  figure(5)
+ plot(fh(1,:)*fs,bjp)
+ xlabel('频率 / Hz')
+ ylabel('幅值')
+ title('HHT边谱图')
 %%
 hhtfeature = [];
 for k =1:3

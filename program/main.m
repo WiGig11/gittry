@@ -8,15 +8,15 @@ endpos = 279;  %279
 starttime  = 1;
 %% 数据导入 & 降噪 & 构造时间-最大强度图
 cd ..
-cd('G:\硕士期间\光纤传感\数据\118data');
-intensity1 = importdata('DifferenceData 20221108152258188_ch1.mat');%mang
-intensity2 = importdata('DifferenceData 20221108152651356_ch1.mat');%mang
-intensity3 = importdata('DifferenceData 20221108152725782_ch1.mat');%zhengchang
+cd('G:\硕士期间\光纤传感\数据\gittry\testmat');
+intensity1 = importdata('chzblindmiddle.mat');%mang
+intensity2 = importdata('chzblindright.mat');%mang
+intensity3 = importdata('chzleft.mat');%zhengchang
 % intensity4 = importdata('DifferenceData 20221108152615313_ch1.mat');
 % intensity5 = importdata('DifferenceData 20221108152651356_ch1.mat');
 % intensity6 = importdata('DifferenceData 20221108152725782_ch1.mat');
 cd ..
-cd('G:\硕士期间\光纤传感\数据\program');
+cd('G:\硕士期间\光纤传感\数据\gittry\program');
 
 %%
 noise_reducted1 = datapre(intensity1,startpos,endpos,starttime,length(intensity1));
@@ -77,10 +77,10 @@ stride = [average_stride1;average_stride2;average_stride3];
 feature = [feature,stride];
 %% 能量特征挖掘
 % 统计time_range peak_pos_range内的时域能量
-% [step_energy_array1,left_side_E1,right_side_E1] = get_step_energy2(noise_reducted1,startpos,peak1_pos,peak1_index);
-% [step_energy_array2,left_side_E2,right_side_E2] = get_step_energy2(noise_reducted2,startpos,peak2_pos,peak2_index);
-% [step_energy_array3,left_side_E3,right_side_E3] = get_step_energy2(noise_reducted3,startpos,peak3_pos,peak3_index);
-[step_energy_array,left_step_energy_array,right_step_energy_array] = get_step_energy2_1(noise_reducted1,startpos,peak1_pos,peak1_index)
+% [step_energy_array1,left_side_E1,right_side_E1] = get_step_energy(noise_reducted1,startpos,peak1_pos,peak1_index);
+% [step_energy_array2,left_side_E2,right_side_E2] = get_step_energy(noise_reducted2,startpos,peak2_pos,peak2_index);
+% [step_energy_array3,left_side_E3,right_side_E3] = get_step_energy(noise_reducted3,startpos,peak3_pos,peak3_index);
+% [step_energy_array,left_step_energy_array,right_step_energy_array] = get_step_energy2_1(noise_reducted1,startpos,peak1_pos,peak1_index)
 
 % figure(3)
 % subplot(9,1,1);plot(noise_reducted1(peak1_pos(1)-startpos-4,peak1_index(1)-70:peak1_index(1)+70));
@@ -126,18 +126,18 @@ used_fig_num = 0;
 
 %% 单步信号时域特征提取:
 after_pca1 = step_group_observe(raw_sig1_group,used_fig_num,after_hampel1);  %PCA
-after_pca2 = step_group_observe(raw_sig2_group,used_fig_num+1,after_hampel2);
-after_pca3 = step_group_observe(raw_sig3_group,used_fig_num+2,after_hampel3);
+% after_pca2 = step_group_observe(raw_sig2_group,used_fig_num+1,after_hampel2);
+% after_pca3 = step_group_observe(raw_sig3_group,used_fig_num+2,after_hampel3);
 
 % after_pca1 = step_group_observe(raw_sig1_group,used_fig_num,Butterworth_LPF_45_50_1dB_50dB(after_hampel1));
 % after_pca2 = step_group_observe(raw_sig2_group,used_fig_num+1,Butterworth_LPF_45_50_1dB_50dB(after_hampel2));
 % after_pca3 = step_group_observe(raw_sig3_group,used_fig_num+2,Butterworth_LPF_45_50_1dB_50dB(after_hampel3));
 
 feature1_single_step_time_domain = extract_f_of_single_step(after_pca1);
-feature2_single_step_time_domain = extract_f_of_single_step(after_pca2);
-feature3_single_step_time_domain = extract_f_of_single_step(after_pca3);
-feature_single = [feature1_single_step_time_domain;feature2_single_step_time_domain;feature3_single_step_time_domain];
-feature = [feature feature_single];
+% feature2_single_step_time_domain = extract_f_of_single_step(after_pca2);
+% feature3_single_step_time_domain = extract_f_of_single_step(after_pca3);
+% feature_single = [feature1_single_step_time_domain;feature2_single_step_time_domain;feature3_single_step_time_domain];
+% feature = [feature feature_single];
 
 %% DSTFT分析：目前需要大量的步数才有可能获取准确的特征参数
 %parameter:有效时宽点数 & 主要成分瑞利波的中心频率 & 有效带宽 & 中心频率的左右能量比
@@ -156,11 +156,11 @@ feature = [feature feature_single];
 %     after_pca3];
 %% HHT
 %对一维信号进行分解
-% m1 = after_pca2;
-% imf = hht(m1);
-% [f1_matrix,hhtfeature1] = hhtfretrans(hht(after_pca1),0);
-% [f2_matrix,hhtfeature2] = hhtfretrans(hht(after_pca2),0);
-% [f3_matrix,hhtfeature3] = hhtfretrans(hht(after_pca3),0);
+m1 = after_pca1;
+imf =aver(m1);
+% [f1_matrix,hhtfeature1,bjp1] = hhtfretrans(aver(after_pca1),0);
+% [f2_matrix,hhtfeature2,bjp2] = hhtfretrans(hht(after_pca2),0);
+% [f3_matrix,hhtfeature3,bjp3] = hhtfretrans(hht(after_pca3),0);
 % hhtf = [hhtfeature1;hhtfeature2;hhtfeature3];
 % feature = [feature hhtf];
 
@@ -171,9 +171,9 @@ feature = [feature feature_single];
 
 %% 单步二维
 %提取一步周围时间和位置的信号，作为备用的二维信号
-step_sig1_group2 = get_each_step_sig2(peak1_pos,peak1_index,intensity1);
-step_sig2_group2 = get_each_step_sig2(peak2_pos,peak2_index,intensity2);
-step_sig3_group2 = get_each_step_sig2(peak3_pos,peak3_index,intensity3);
+% step_sig1_group2 = get_each_step_sig2(peak1_pos,peak1_index,intensity1);
+% step_sig2_group2 = get_each_step_sig2(peak2_pos,peak2_index,intensity2);
+% step_sig3_group2 = get_each_step_sig2(peak3_pos,peak3_index,intensity3);
 
 % mesh(step_sig1_group2{2,1})
 % xlabel('时间n');
@@ -189,10 +189,10 @@ step_sig3_group2 = get_each_step_sig2(peak3_pos,peak3_index,intensity3);
 % timef = [timef1;timef2;timef3];
 % feature = [feature timef];
 %输出欧式几何距离作为分裂标准
-%% WT
-[cA1,cD1] = dwt_3_wave(step_sig1_group2,'db4',used_fig_num); %一次调用 出三张图
-[cA2,cD2] = dwt_3_wave(step_sig2_group2,'db4',used_fig_num); %一次调用 出三张图
-[cA3,cD3] = dwt_3_wave(step_sig3_group2,'db4',used_fig_num); %一次调用 出三张图
+% %% WT
+% [cA1,cD1] = dwt_3_wave(step_sig1_group2,'db4',used_fig_num); %一次调用 出三张图
+% [cA2,cD2] = dwt_3_wave(step_sig2_group2,'db4',used_fig_num); %一次调用 出三张图
+% [cA3,cD3] = dwt_3_wave(step_sig3_group2,'db4',used_fig_num); %一次调用 出三张图
 
 % wtf = [get_feature(cA1);get_feature(cA2);get_feature(cA3)];
 % feature = [feature wtf];
