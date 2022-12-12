@@ -56,7 +56,7 @@ def main():
     trainingSet = []  # 训练数据集
     testSet = []  # 测试数据集
     split = 0.7  # 分割的比例
-    loadDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\allfeatures1.csv", split, trainingSet, testSet)
+    loadDataset(r"G:\硕士期间\光纤传感\数据\gittry\pythonProject1\yanshi1.csv", split, trainingSet, testSet)
     print("Train set :" + repr(len(trainingSet)))
     print("Test set :" + repr(len(testSet)));
     # 去除空格
@@ -72,7 +72,7 @@ def main():
     clf.fit(x_train,y_train)
     score = clf.score(x_test,y_test)
     print("Accuracy:" + repr(score*100) + "%")
-    with open('G:\硕士期间\光纤传感\数据\gittry\pythonProject1/allfeatures1.dot', 'w', encoding='utf-8') as f:
+    with open('G:\硕士期间\光纤传感\数据\gittry\pythonProject1/yanshi1.dot', 'w', encoding='utf-8') as f:
         f = export_graphviz(clf, out_file=f, filled=True,
                             rounded=True)  # filled=True,rounded=True ：前面一个设置是填充颜色，后面一个是圆形框
 
